@@ -17,6 +17,6 @@ A generic *offline* installer for Arch-based ISOs. Feel free to use it for your 
 + Boot menus assume Grub, Syslinux, and systemd-boot are installed
 + Default partitioning tools are gparted, cfdisk, and parted
 + wipe must be installed for the "secure wipe" option
-+ geany is used to edit files
++ xed is used to edit files
 + You will need to add your own post-configuration code for DMs, and specific files
 + No changes to the `-D` argument of Arch ISO build.sh
