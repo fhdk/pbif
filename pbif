@@ -36,7 +36,7 @@ TRANS_SRC="/pbif-master"							# Dir where translation files are stored
 #								#
 
 # Create a temporary file to store menu selections
-ANSWER="/tmp/.abif"
+ANSWER="/tmp/.pbif"
 
 # Installation
 BOOTLOADER="n/a"      								# Which bootloader has been installed?
@@ -1456,7 +1456,7 @@ install_root(){
   cp /etc/pacman.d/mirrorlist ${MOUNTPOINT}/etc/pacman.d/mirrorlist 2>>/tmp/.errlog
   
   # Clean up installation
-  [[ -d ${MOUNTPOINT}/abif-master ]] && rm -R ${MOUNTPOINT}/abif-master 2>>/tmp/.errlog
+  [[ -d ${MOUNTPOINT}/pbif-master ]] && rm -R ${MOUNTPOINT}/pbif-master 2>>/tmp/.errlog
   rm -rf ${MOUNTPOINT}/vomi 2>>/tmp/.errlog
   rm -rf ${BYPASS} 2>>/tmp/.errlog
   rm -rf ${MOUNTPOINT}/source 2>>/tmp/.errlog
@@ -1466,7 +1466,7 @@ install_root(){
   rmdir ${MOUNTPOINT}/source 2>>/tmp/.errlog
   rm -f ${MOUNTPOINT}/etc/sudoers.d/g_wheel 2>>/tmp/.errlog
   rm -f ${MOUNTPOINT}/var/lib/NetworkManager/NetworkManager.state 2>>/tmp/.errlog
-  rm -f ${MOUNTPOINT}/update-abif 2>>/tmp/.errlog
+  rm -f ${MOUNTPOINT}/update-pbif 2>>/tmp/.errlog
   sed -i 's/.*pam_wheel\.so/#&/' ${MOUNTPOINT}/etc/pam.d/su 2>>/tmp/.errlog
  
   # clean out archiso files from install
