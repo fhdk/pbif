@@ -110,32 +110,32 @@ select_language() {
 	"9" $"Magyar             (hu_HU)" 2>${ANSWER}
 
 	case $(cat ${ANSWER}) in
-        "1") source /abif-master/english.trans
+        "1") source ${TRANS_SRC}/english.trans
              CURR_LOCALE="en_US.UTF-8"
              ;;
-        "2") source /abif-master/spanish.trans
+        "2") source ${TRANS_SRC}/spanish.trans
              CURR_LOCALE="es_ES.UTF-8"
              ;; 
-        "3") source /abif-master/portuguese_brasil.trans
+        "3") source ${TRANS_SRC}/portuguese_brasil.trans
 			 CURR_LOCALE="pt_BR.UTF-8"
 			 ;;
-        "4") source /abif-master/portuguese.trans
+        "4") source ${TRANS_SRC}/portuguese.trans
 			 CURR_LOCALE="pt_PT.UTF-8"
 			 ;;		
-		"5") source /abif-master/french.trans
+		"5") source ${TRANS_SRC}/french.trans
              CURR_LOCALE="fr_FR.UTF-8"
              ;;	 
-        "6") source /abif-master/russian.trans
+        "6") source ${TRANS_SRC}/russian.trans
              CURR_LOCALE="ru_RU.UTF-8"
              FONT="LatKaCyrHeb-14.psfu"
              ;;
-        "7") source /abif-master/italian.trans
+        "7") source ${TRANS_SRC}/italian.trans
              CURR_LOCALE="it_IT.UTF-8"
              ;;
-        "8") source /abif-master/dutch.trans
+        "8") source ${TRANS_SRC}/dutch.trans
              CURR_LOCALE="nl_NL.UTF-8"
              ;;
-        "9") source /abif-master/hungarian.trans
+        "9") source ${TRANS_SRC}/hungarian.trans
              CURR_LOCALE="hu_HU.UTF-8"
              FONT="lat2-16.psfu"
              ;;
