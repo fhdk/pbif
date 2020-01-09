@@ -36,7 +36,7 @@ TRANS_SRC="/pbif-master"							# Dir where translation files are stored
 #								#
 
 # Create a temporary file to store menu selections
-ANSWER="/tmp/.pbif"
+ANSWER="/tmp/.abif"
 
 # Installation
 BOOTLOADER="n/a"      								# Which bootloader has been installed?
@@ -358,16 +358,22 @@ generate_fstab() {
 
     # Determine if there is a swapfile before copying over appropriate OB configs
 	if [[ $(cat $MOUNTPOINT/etc/fstab | grep "swap") != "" ]]; then
+        # rc.xml -- swap/hibernate
 	    cp -f /inst/rc2.xml $MOUNTPOINT/etc/skel/.config/openbox/menu.xml 2>/tmp/.errlog
+		cp -f /inst/rc2.xml $MOUNTPOINT/root/.config/openbox/menu.xml 2>/tmp/.errlog
 		cp -f /inst/rc2.xml $MOUNTPOINT/home/$ISO_USER/.config/openbox/menu.xml 2>/tmp/.errlog
-			
+        # menu.xml -- swap/hibernate
 	    cp -f /inst/menu2.xml $MOUNTPOINT/etc/skel/.config/openbox/menu.xml 2>/tmp/.errlog
+		cp -f /inst/menu2.xml $MOUNTPOINT/root/.config/openbox/menu.xml 2>/tmp/.errlog
 		cp -f /inst/menu2.xml $MOUNTPOINT/home/$ISO_USER/.config/openbox/menu.xml 2>/tmp/.errlog
 	else
+        # rc.xml -- no swap
 		cp -f /inst/rc.xml $MOUNTPOINT/etc/skel/.config/openbox/menu.xml 2>/tmp/.errlog
+        cp -f /inst/rc.xml $MOUNTPOINT/root/.config/openbox/menu.xml 2>/tmp/.errlog
 		cp -f /inst/rc.xml $MOUNTPOINT/home/$ISO_USER/.config/openbox/menu.xml 2>/tmp/.errlog
-	
+	    # rc.xml -- no swap
 	    cp -f /inst/menu.xml $MOUNTPOINT/etc/skel/.config/openbox/menu.xml 2>/tmp/.errlog
+	    cp -f /inst/menu.xml $MOUNTPOINT/root/.config/openbox/menu.xml 2>/tmp/.errlog
 		cp -f /inst/menu.xml $MOUNTPOINT/home/$ISO_USER/.config/openbox/menu.xml 2>/tmp/.errlog
 	fi
 	check_for_error
@@ -1456,7 +1462,7 @@ install_root(){
   cp /etc/pacman.d/mirrorlist ${MOUNTPOINT}/etc/pacman.d/mirrorlist 2>>/tmp/.errlog
   
   # Clean up installation
-  [[ -d ${MOUNTPOINT}/pbif-master ]] && rm -R ${MOUNTPOINT}/pbif-master 2>>/tmp/.errlog
+  [[ -d ${MOUNTPOINT}${TRANS_SRC} ]] && rm -R ${MOUNTPOINT}${TRANS_SRC}>>/tmp/.errlog
   rm -rf ${MOUNTPOINT}/vomi 2>>/tmp/.errlog
   rm -rf ${BYPASS} 2>>/tmp/.errlog
   rm -rf ${MOUNTPOINT}/source 2>>/tmp/.errlog
@@ -1492,9 +1498,13 @@ install_root(){
   
   # Display Manager
   arch_chroot "systemctl enable lxdm" 2>>/tmp/.errlog
+
   # Copy our predefined lxdm.conf
   cp -f /inst/lxdm.conf ${MOUNTPOINT}/etc/lxdm/lxdm.conf 2>>/tmp/.errlog
+
+  # Clean install files
   [[ -d ${MOUNTPOINT}/inst ]] && rm -R ${MOUNTPOINT}/inst &> /dev/null 2>>/tmp/.errlog
+
   check_for_error
   
   # Virtualbox Guest
